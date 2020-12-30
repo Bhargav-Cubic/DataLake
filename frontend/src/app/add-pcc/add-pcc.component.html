@@ -1,0 +1,56 @@
+<body>
+	<div class="mx-auto">
+		<p style="font-size:120%;text-align:center;margin-top:3%">
+			<b>Add New PCC</b>
+		</p>
+		<div style="margin-top:6%">
+			<label ng-model="StringValue" class="col-md-6" [ngStyle]="{'color': status? 'green' : 'red'}" style="text-align: center; white-space: pre-wrap;margin-left:30%">{{responseLabel}}</label>
+		</div>
+		<div [hidden]="submitted" style="padding-left:22%;width:100%;">
+			<form [formGroup]="pccform" (ngSubmit)="onSubmit()" novalidate style="margin-left:10%;">
+
+				<div class="container">
+					<label for="pcc" class="control-label required">
+						<b>PCC</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<textarea id="pcc" class="form-control" formControlName="pcc" maxlength="500" style="width:400px;height:150px" placeholder="Enter single or comma separate PCC values">		
+					    </textarea>
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('pcc')" errorMsg="PCC is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+				<div class="container">
+					<label for="UploadedBy" class="control-label required">
+						<b>Uploaded By</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="8" style="width:400px;">
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Requested By is required">
+						</app-field-error-display>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="container">
+					<div class="row col-md-12">
+						<div>
+							<button class="btn btn-primary" style="width:100px">Submit</button>
+						</div>
+
+						<div style="margin-left:50px">
+							<button type="reset" class="btn btn-primary" id="reset-btn" ng-click="reset()" style="width:100px;color:blue">Reset</button>
+						</div>
+					</div>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+
+</body>

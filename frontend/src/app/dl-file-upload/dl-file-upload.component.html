@@ -1,0 +1,267 @@
+<html>
+
+<body>
+  <div class="mx-auto">
+    <p style="font-size:120%;text-align:center;margin-top:3%">
+      <b>Custom Data Ingestion in Sandbox Data Lake</b>
+    </p>
+    <br>
+    <br>
+    <br>
+    <div class="mx-auto" style="width:1000px;">
+      <form [formGroup]="dlfileupload" (ngSubmit)="onSubmit()" novalidate style="margin-left:20%">
+
+        <div class="container">
+          <label for="Client Specific Data">
+            <b>Does this file contain Client Specific Data ?</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+
+          <div class="form-group radio row col-md-12">
+            <label class="center-block">
+              <input type="radio" id="ClientSpecificData" formControlName="ClientSpecificData" value="Yes" (click)="clientSpecificDataYes()">&nbsp;Yes</label>&nbsp;&nbsp;
+            <label class="center-block">
+              <input type="radio" id="ClientSpecificData" formControlName="ClientSpecificData" value="No" (click)="clientSpecificDataNo()">&nbsp;No</label>
+            <app-field-error-display style="margin-left:300px;" [displayError]="isFieldValid('ClientSpecificData')" errorMsg="Client Specific Data is required">
+            </app-field-error-display>
+          </div>
+        </div>
+
+
+
+
+        <div class="container" *ngIf=clientspecificdata>
+          <div class="row col-md-12">
+            <textarea class="form-control" id="ClientDetails" formControlName="ClientDetails" placeholder="If Yes,Please Enter Client Details"
+              style="width:300px;height:50px"></textarea>
+              <div [hidden]="clientdetails_check">
+                <p style="color:red;margin-left:20px;">Client Details required</p>
+              </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="container">
+          <label for="PCI Data">
+            <b>Does this file contain PCI information ?</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+
+          <div class="form-group radio row col-md-12">
+            <label class="center-block">
+              <input type="radio" id="PCIData" formControlName="PCIData" value="Yes" (click)="IsPCIDataYes()">&nbsp;Yes</label>&nbsp;&nbsp;
+            <label class="center-block">
+              <input type="radio" id="PCIData" formControlName="PCIData" value="No" (click)="IsPCIDataNo()">&nbsp;No</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <app-field-error-display style="margin-left:340px;" [displayError]="isFieldValid('PCIData')" errorMsg="PCI Data is required">
+            </app-field-error-display>
+            <label style="color: brown">{{PCI_Message}}</label>
+          </div>
+
+        </div>
+
+
+
+        <div class="container">
+          <label for="FileDescription" class="control-label required">
+            <b>File Description</b>
+          </label>
+          <div class="row col-md-12">
+            <input id="FileDescription" class="form-control" formControlName="FileDescription" style="width: 400px" placeholder="For example supplier_info ">
+          </div>
+        </div>
+
+
+
+
+        <div class="container">
+          <label for="TypeOfFile" class="control-label required">
+            <b>Type Of File</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+          <div class="row col-md-12">
+            <select class="form-control" id="TypeOfFile" formControlName="TypeOfFile" maxlength="20" style="width: 400px" (change)="onChangeTypeOfFile($event.target.value)">
+              <option disabled selected value> Select Type Of File </option>
+              <option *ngFor="let ftype of typeoffile">
+                {{ftype}}
+              </option>
+            </select>
+            <app-field-error-display style="margin-left:50px;" [displayError]="isFieldValid('TypeOfFile')" errorMsg="Type Of File is required">
+            </app-field-error-display>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="container" *ngIf=fileformat_flag>
+          <label for="FileFormat" class="control-label required">
+            <b>File Format:</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+          <div class="row col-md-12">
+            <select class="form-control" id="FileFormat" formControlName="FileFormat" style="width: 400px">
+              <option disabled selected value> Select File Format </option>
+              <option *ngFor="let fformat of fileformat">
+                {{fformat}}
+              </option>
+            </select>
+            <app-field-error-display style="margin-left:50px;" [displayError]="isFieldValid('FileFormat')" errorMsg="File Format is required">
+            </app-field-error-display>
+          </div>
+
+        </div>
+
+
+
+
+        <div class="container">
+          <label for="FileUpload">
+            <b>File Upload</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+
+          <div class="form-group radio row col-md-12">
+            <label class="center-block">
+              <input type="radio" id="FileUpload" formControlName="FileUpload" value="fileupload" (click)="dlfileUpload()">&nbsp;File Upload</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label class="center-block">
+              <input type="radio" id="FileUpload" formControlName="FileUpload" value="MFT Transfer" (click)="mftUpload()">&nbsp;MFT Transfer</label>
+            <app-field-error-display style="margin-left:220px;" [displayError]="isFieldValid('FileUpload')" errorMsg="File Upload is required">
+            </app-field-error-display>
+          </div>
+        </div>
+
+
+        <div class="container" *ngIf=fileupload_flag>
+          <label for="FileUpload">File Upload</label>
+
+          <div class="form-group">
+            <input #fileUpload type="file" class="form-control-file" id="fileuploaded" style="width: 100%;" (change)="selectFile($event)">
+            <app-field-error-display style="margin-left:340px;" [displayError]="isFieldValid('fileuploaded')" errorMsg="File Upload is required">
+            </app-field-error-display>
+          </div>
+
+        </div>
+
+
+        <div class="container" *ngIf=mftupload_flag>
+          <label for="MFTFilePrefix" class="control-label required">
+            <b>MFT File Prefix</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+          <div class="row col-md-12">
+            <textarea id="MFTFilePrefix" class="form-control" formControlName="MFTFilePrefix" maxlength="20" style="width: 400px" placeholder="Enter the MFT File pattern"></textarea>
+
+            <app-field-error-display style="margin-left:50px;" [displayError]="isFieldValid('MFTFilePrefix')" errorMsg="MFT File Prefix is required">
+            </app-field-error-display>
+          </div>
+        </div>
+
+
+
+        <div class="container" *ngIf=mftupload_flag>
+          <label for="MFTFileFrequency" class="control-label required">
+            <b>MFT File Frequency:</b>
+          </label>
+          <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+          <div class="row col-md-12">
+            <select class="form-control" id="MFTFileFrequency" formControlName="MFTFileFrequency" style="width: 400px" (change)="onChangeMFTFileFrequency($event.target.value)">
+              <option disabled selected value> Select File Frequency </option>
+              <option *ngFor="let frequency of filefrequency">
+                {{frequency}}
+              </option>
+            </select>
+            <app-field-error-display style="margin-left:15px;" [displayError]="isFieldValid('MFTFileFrequency')" errorMsg="MFT File Frequency is required">
+            </app-field-error-display>
+          </div>
+
+        </div>
+
+
+        <div class="container">
+          <label for="PurgeFrequency" class="control-label required">
+            <b>Select Purge Frequency:</b>
+          </label>
+          <div class="row col-md-12">
+            <select class="form-control" id="PurgeFrequency" formControlName="PurgeFrequency" maxlength="20" style="width: 400px">
+              <option disabled selected value> Select File Purge Frequency </option>
+              <option *ngFor="let pfrequency of purgefrequency">
+                {{pfrequency}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="container" *ngIf=testfilepath_flag>
+          <label>File will be available in :{{this.testfilepath}}      after few hours.</label>
+          <label style="color:brown">Note:The file will overwrite If the uploaded date and file name is same</label>
+        </div>
+        <br>
+        <br>
+
+        <div class="container">
+
+          <input type="checkbox" formControlName="tnc" id="tnc" (click)="tncCheck()" />&nbsp;&nbsp; I have read and agree to the
+          <a href="https://gbt.jiveon.com/" target="blank"> Terms of Service and Privacy Policy</a>
+          <br>
+          <br>
+          <div [hidden]="tnc_checked">
+            <p style="color:red;margin-left:20px;">Please accept terms and conditions</p>
+          </div>
+
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="container">
+          <div class="row col-md-12">
+            <button class="btn btn-primary" [disabled]=filetype_flag style="width: 150px;margin-left:20%;">Submit</button>
+          </div>
+        </div>
+        <div>
+          <label style="color: brown">{{this.dlfileupload_response_message}}</label>
+        </div>
+
+      </form>
+
+    </div>
+
+
+
+  </div>
+</body>
+
+</html>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

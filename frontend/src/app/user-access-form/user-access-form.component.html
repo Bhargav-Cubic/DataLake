@@ -1,0 +1,218 @@
+<body>
+	<div class="mx-auto">
+		<p style="font-size:120%;text-align:center;margin-top:3%">
+			<b>DL Access Request</b>
+		</p>
+		<div>
+			<label class="col-md-6" ng-model="StringValue" [ngStyle]="{'color': status? 'green' : 'red'}" style="text-align: center; white-space: pre-wrap;margin-left:30%">{{responseLabel}}</label>
+		</div>
+		<div [hidden]="submitted" class="mx-auto" style="width:1000px;">
+			<form [formGroup]="useraccessform" (ngSubmit)="onSubmit()" novalidate style="margin-left:30%">
+
+
+				<div class="container">
+					<label for="GBT ID" class="control-label required">
+						<b>GBT ID</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="GBTID" class="form-control" formControlName="GBTID" maxlength="8" style="width: 400px">
+
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('GBTID')" errorMsg="GBT ID is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="FirstName" class="control-label required">
+						<b>First Name</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="FirstName" class="form-control" formControlName="FirstName" maxlength="30" style="width: 400px">
+
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('FirstName')" errorMsg="First Name is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+
+
+				<div class="container">
+					<label for="LastName" class="control-label required">
+						<b>Last Name</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="LastName" class="form-control" formControlName="LastName" maxlength="20" style="width: 400px">
+
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('LastName')" errorMsg="Last Name is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="Email" class="control-label required">
+						<b>Email Address</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="Email" class="form-control" formControlName="Email" maxlength="50" style="width: 400px">
+
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('Email')" errorMsg="Email is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="Department" class="control-label required">
+						<b>Department</b>
+					</label>
+					<div class="row col-md-12">
+						<input id="Department" class="form-control" formControlName="Department" maxlength="20" style="width: 400px">
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="JobDescription" class="control-label required">
+						<b>Job Description</b>
+					</label>
+					<div class="row col-md-12">
+						<textarea id="JobDescription" class="form-control" formControlName="JobDescription" maxlength="500" style="width:400px;height:100px"></textarea>
+					</div>
+				</div>
+
+
+
+				<div class="container">
+					<label for="Environment">
+						<b>Environment</b>
+					</label>&nbsp;
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div>
+						<div class="row col-md-12">
+							<div style="width:400px;margin-bottom:15px">
+
+								<angular2-multiselect [data]="dropdownList_dev" name="development" [(ngModel)]="selectedItems_dev" [settings]="dropdownSettings_dev"
+								 (onSelect)="onItemSelect_dev($event)" (onDeSelect)="OnItemDeSelect_dev($event)" (onSelectAll)="onSelectAll_dev($event)"
+								 (onDeSelectAll)="onDeSelectAll_dev($event)" (click)="onChange_dev($event)" formControlName="Development"></angular2-multiselect>
+
+							</div>
+							<div [hidden]="env_valid">
+								<p style="color:red;margin-left:20px;">Environment is required</p>
+							</div>
+						</div>
+
+
+						<div style="width:400px;margin-bottom:15px">
+
+							<angular2-multiselect [data]="dropdownList_prod" name="production" [(ngModel)]="selectedItems_prod" [settings]="dropdownSettings_prod"
+							 (onSelect)="onItemSelect_prod($event)" (onDeSelect)="OnItemDeSelect_prod($event)" (onSelectAll)="onSelectAll_prod($event)"
+							 (onDeSelectAll)="onDeSelectAll_prod($event)" (click)="onChange_prod($event)" formControlName="Production"></angular2-multiselect>
+
+						</div>
+						<div style="width:400px;margin-bottom:15px">
+
+							<angular2-multiselect [data]="dropdownList_sbox" id="sanbox" name="sandbox" [(ngModel)]="selectedItems_sbox" [settings]="dropdownSettings_sbox"
+							 (onSelect)="onItemSelect_sbox($event)" (onDeSelect)="OnItemDeSelect_sbox($event)" (onSelectAll)="onSelectAll_sbox($event)"
+							 (onDeSelectAll)="onDeSelectAll_sbox($event)" (click)="onChange_sbox($event)" formControlName="Sandbox"></angular2-multiselect>
+
+						</div>
+
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="UserType">
+						<b>User Type</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+
+					<div class="form-group radio row col-md-12">
+						<label class="center-block">
+							<input type="radio" id="UserType" formControlName="UserType" value="Developer">Developer</label>&nbsp;
+						<label class="center-block">
+							<input type="radio" id="UserType" formControlName="UserType" value="Admin">Admin</label>&nbsp;
+						<label class="center-block">
+							<input type="radio" id="UserType" formControlName="UserType" value="Analyst">Analyst</label>
+
+						<app-field-error-display style="margin-left:200px;" [displayError]="isFieldValid('UserType')" errorMsg="User Type is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="PIIAccess">
+						<b>PII Access</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="form-group radio row col-md-12">
+						<label class="center-block">
+							<input type="radio" id="PIIAccess" formControlName="PIIAccess" value="Yes">Yes</label>&nbsp;
+						<label class="center-block">
+							<input type="radio" id="PIIAccess" formControlName="PIIAccess" value="No">No</label>
+
+
+
+						<app-field-error-display style="margin-left:340px;" [displayError]="isFieldValid('PIIAccess')" errorMsg="PII Access is required">
+						</app-field-error-display>
+					</div>
+				</div>
+
+
+				<div class="container">
+					<label for="Reason" class="control-label required">
+						<b>Reason</b>
+					</label>
+					<div class="row col-md-12">
+						<textarea id="Reason" class="form-control" formControlName="Reason" maxlength="500" style="width:400px;height:100px"></textarea>
+
+
+					</div>
+				</div>
+
+
+
+
+				<div class="container">
+					<label for="RequestedBy" class="control-label required">
+						<b>Requested By</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="RequestedBy" class="form-control" formControlName="RequestedBy" maxlength="8" style="width:400px">
+
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('RequestedBy')" errorMsg="Requested By is required">
+						</app-field-error-display>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="container">
+					<button class="btn btn-primary" style="width: 150px;margin-left:20%;">Submit</button>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>

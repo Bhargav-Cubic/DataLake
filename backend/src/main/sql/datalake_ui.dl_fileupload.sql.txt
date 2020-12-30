@@ -1,0 +1,17 @@
+CREATE TABLE dl_fileupload (
+  sequence_id bigint(20) NOT NULL AUTO_INCREMENT,
+  clientdetails varchar(50) DEFAULT NULL,
+  file_description varchar(500) DEFAULT NULL,
+  typeoffile varchar(50) DEFAULT NULL,
+  fileformat varchar(50) DEFAULT NULL,
+  isfileupload varchar(1) DEFAULT NULL,
+  mftfilefrequency varchar(50) DEFAULT NULL,
+  mftfileprefix varchar(50) DEFAULT NULL,
+  purgefrequency varchar(50) DEFAULT NULL,
+  filename varchar(50) DEFAULT NULL,
+  filepath varchar(500) DEFAULT NULL,
+  tnc varchar(1) DEFAULT NULL,
+  uploaded_date datetime DEFAULT NULL,
+  uploaded_by varchar(10) DEFAULT NULL,
+  PRIMARY KEY (sequence_id)
+) 

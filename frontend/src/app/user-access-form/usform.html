@@ -1,0 +1,110 @@
+<body>
+    <div class="container">
+
+        <div class="card mx-auto" style="height: 100%; margin-top: 3%; width: 100%; display: inline">
+            <p style="font-size: 150%; text-align: center;">
+                <b>User Access Form</b>
+            </p>
+            <div>
+                <label class="col-md-6" ng-model="StringValue" [ngStyle]="{'color': status? 'green' : 'red'}" style="text-align: center; white-space: pre-wrap;margin-left:30%">{{responseLabel}}</label>
+            </div>
+            <div class="card mx-auto" style="height: 100%; margin-top: 1%; border-radius: 25px; width: 100%; display: inline">
+                <form [formGroup]="useraccessform" (ngSubmit)="onSubmit()" novalidate style="margin-left:10%">
+                    <div class="format">
+                        <div class="left">
+                            <div>
+                                <label for="GBT ID" class="control-label required">
+                                    <b>GBT ID</b>
+                                </label>
+                                <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+                                <input id="GBTID" class="form-control" formControlName="GBTID" maxlength="8" style="width: 400px">
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('GBTID')" errorMsg="GBT ID is required">
+                            </app-field-error-display>
+                            <div>
+                                <label for="FirstName" class="control-label required">
+                                    <b>First Name</b>
+                                </label>
+                                <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+                                <input id="FirstName" class="form-control" formControlName="FirstName" maxlength="30" style="width: 400px">
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('FirstName')" errorMsg="First Name is required">
+                            </app-field-error-display>
+                            <div>
+                                <label for="Email" class="control-label required">
+                                    <b>Email Address</b>
+                                </label>
+                                <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+                                <input id="Email" class="form-control" formControlName="Email" maxlength="50" style="width: 400px">
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('Email')" errorMsg="Email is required">
+                            </app-field-error-display>
+                            <div>
+                                <label for="JobDescription" class="control-label required">
+                                    <b>Job Description</b>
+                                </label>
+                                <textarea id="JobDescription" class="form-control" formControlName="JobDescription" maxlength="500" style="width:400px;height:100px"></textarea>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div>
+                                <label for="LastName" class="control-label required">
+                                    <b>Last Name</b>
+                                </label>
+                                <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+                                <input id="LastName" class="form-control" formControlName="LastName" maxlength="20" style="width: 400px">
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('LastName')" errorMsg="Last Name is required">
+                            </app-field-error-display>
+                            <div class="col-md-6">
+                                <label for="Reason" class="control-label required">
+                                    <b>Reason</b>
+                                </label>
+                                <textarea id="Reason" class="form-control" formControlName="Reason" maxlength="500" style="width:400px;height:100px"></textarea>
+                            </div>
+                            <app-field-error-display [displayError]="isFieldValid('Reason')" errorMsg="Reason is required">
+                            </app-field-error-display>
+                            <label for="Environment">
+                                <b>Environment</b>
+                            </label>&nbsp;
+                            <span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+                            <div>
+                                <div style="width:400px;margin-bottom:15px">
+            
+                                    <angular2-multiselect [data]="dropdownList_dev" name="development" [(ngModel)]="selectedItems_dev" [settings]="dropdownSettings_dev"
+                                     (onSelect)="onItemSelect_dev($event)" (onDeSelect)="OnItemDeSelect_dev($event)" (onSelectAll)="onSelectAll_dev($event)"
+                                     (onDeSelectAll)="onDeSelectAll_dev($event)" (click)="onChange_dev($event)" formControlName="Development"></angular2-multiselect>
+            
+                                </div>
+            
+            
+                                <div style="width:400px;margin-bottom:15px">
+            
+                                    <angular2-multiselect [data]="dropdownList_prod" name="production" [(ngModel)]="selectedItems_prod" [settings]="dropdownSettings_prod"
+                                     (onSelect)="onItemSelect_prod($event)" (onDeSelect)="OnItemDeSelect_prod($event)" (onSelectAll)="onSelectAll_prod($event)"
+                                     (onDeSelectAll)="onDeSelectAll_prod($event)" (click)="onChange_prod($event)" formControlName="Production"></angular2-multiselect>
+            
+                                </div>
+                                <div style="width:400px;margin-bottom:15px">
+            
+                                    <angular2-multiselect [data]="dropdownList_sbox" id="sanbox" name="sandbox" [(ngModel)]="selectedItems_sbox" [settings]="dropdownSettings_sbox"
+                                     (onSelect)="onItemSelect_sbox($event)" (onDeSelect)="OnItemDeSelect_sbox($event)" (onSelectAll)="onSelectAll_sbox($event)"
+                                     (onDeSelectAll)="onDeSelectAll_sbox($event)" (click)="onChange_sbox($event)" formControlName="Sandbox"></angular2-multiselect>
+            
+                                </div>
+                                <div [hidden]="env_valid">
+                                    <p style="color:red">Environment is required</p>
+                                </div>
+                            </div>
+            
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" style="width: 200px">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>   

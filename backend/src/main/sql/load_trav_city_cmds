@@ -1,0 +1,3 @@
+hadoop fs -getmerge /user/svc_aegbtdi/schema/gtdr/trav_city/* trav_city
+
+SQL_QUERY="LOAD DATA LOCAL INFILE 'trav_city' INTO TABLE datalake_ui.trav_city FIELDS TERMINATED BY '\001' LINES TERMINATED BY '\n';"

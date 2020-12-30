@@ -1,0 +1,29 @@
+md-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
+}
+.bg {
+  text-align:center;
+  width:1500px;
+  height:910px;
+  // width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  background-image: url('https://web.aexp-static.com/au/content/text/HALO/halo-about-credit-cards-repayments/Images/1513007_Blue_Background_Gradient.jpg');
+  // background-image: url('/src/assets/img/bg.jpg');
+}
+
+.tittle-color{
+  color: white;
+}
+.input-style { 
+  background-color: white;
+  padding: 5px;
+}

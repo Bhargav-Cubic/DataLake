@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS datalake_ui.dl_delete_master;
+CREATE TABLE datalake_ui.dl_delete_master(SEQUENCE_ID BIGINT NOT NULL AUTO_INCREMENT,
+ master_id varchar(50) NOT NULL,
+ new_master_id varchar(50) NOT NULL,
+ change_log varchar(150) NOT NULL,
+ uploaded_by varchar(50) NOT NULL,
+ uploaded_ts DATETIME NOT NULL,
+ PRIMARY KEY (SEQUENCE_ID));

@@ -1,0 +1,61 @@
+<div class="content">
+	<div class="container">
+
+
+		<div class="card mx-auto"
+			style="height: 320px; margin-top: 50px; border: 3px solid LightSlateGray; border-radius: 25px; width: 80%; text-align: center;">
+			<div class="card mx-auto"
+				style="width: 90%; height: 50px; margin-top: -30px; border: 3px solid LightSlateGray; border-radius: 25px;">
+				<div class="card-body mx-auto" style="padding: 5px; border: none;">
+					<b>Hotel File Upload</b>
+				</div>
+			</div>
+
+			<div class="card-body mx-auto" style="margin-top:1%">
+				<div>
+					<label ng-model="StringValue"
+						[ngStyle]="{'color': status? 'green' : 'red'}"
+						style="text-align: center; white-space: pre-wrap">{{responseLabel}}</label>
+
+				</div>
+			</div>
+			<div class="card-body mx-auto" styles="width=100%;">
+
+				<div class="form-group">
+					<input #fileUpload type="file" class="form-control-file"
+						id="fileupload" style="width: 180%;" (change)="selectFile($event)">
+				</div>
+				<div class="card-body mx-auto">
+					<button [disabled]="btnDisable" type="button"
+						class="btn btn-primary" style="width: 50%;" (click)="upload(); ">Upload</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+
+
+		<div class="card mx-auto"
+			style="height: 200px; margin-top: 150px; border: 3px solid LightSlateGray; border-radius: 25px; width: 80%; text-align: center;">
+			<div class="card mx-auto"
+				style="width: 90%; height: 50px; margin-top: -30px; border: 3px solid LightSlateGray; border-radius: 25px;">
+				<div class="card-body mx-auto" style="padding: 5px; border: none;">
+					<b>Hotel Template Download</b>
+				</div>
+			</div>
+			<div class="card-body mx-auto">Please Download latest Template</div>
+			<div class="card-body mx-auto" style="margin-top: -80px;">
+				<a href="datalakeui\assets\templates\Notes.docx"
+					style="text-decoration: none" download>READ ME</a>
+			</div>
+			<div class="card-body mx-auto" style="margin-top: -80px;">
+				<a href="datalakeui\assets\templates\HNS_INSERT_UPDATE_DELETE.xlsx"
+					style="text-decoration: none" download>HNS_INSERT_UPDATE_DELETE</a>
+			</div>
+		</div>
+	</div>
+
+</div>

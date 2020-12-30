@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS datalake_ui.dl_update_variant;
+CREATE TABLE datalake_ui.dl_update_variant( SEQUENCE_ID BIGINT NOT NULL AUTO_INCREMENT,
+ variant_id varchar(50) NOT NULL,
+ master_id varchar(50) DEFAULT NULL,
+ master_ref_no varchar(20) DEFAULT NULL,
+ change_log varchar(150) NOT NULL,
+ uploaded_by varchar(50) NOT NULL,
+ uploaded_ts DATETIME NOT NULL,
+ PRIMARY KEY (SEQUENCE_ID));

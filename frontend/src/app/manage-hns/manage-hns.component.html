@@ -1,0 +1,382 @@
+<body>
+	<div class="mx-auto">
+		<p style="font-size:120%;text-align:center;margin-top:3%">
+			<b>Manage HNS Match</b>
+		</p>
+		<div style="margin-top:1%">
+			<label ng-model="StringValue" class="col-md-6" [ngStyle]="{'color': status? 'green' : 'red'}" style="text-align: center; white-space: pre-wrap;margin-left:30%">{{responseLabel}}</label>
+		</div>
+
+		<div *ngIf="!isUpload && isUploadSectionEnabled" class="card-body mx-auto btn-padding" styles="width=100%">
+			<div class="form-group" >
+				<input #fileUpload type="file" class="form-control-file"
+					id="fileupload" style="width: 180;" (change)="selectFile($event)">
+			</div>
+			<div class="card-body mx-auto">
+				<button [disabled]="btnDisable" type="button"
+					class="btn btn-primary" style="width: 25%;" (click)="upload(); ">Upload</button>
+			</div>
+
+			<div class="card-body mx-auto" >
+					<a href="\datalakeui\assets\templates\EMP_HNS_MATCH_INSERT_UPDATE_DELETE.xlsx"
+						style="text-decoration: none" download>Download Manage HNS Match File Template</a>
+				</div>
+		</div>
+				
+		
+		<div [hidden]="submitted" *ngIf="!isUpload && !isUploadSectionEnabled" style="width:100%;">
+			<div class="container">
+				<div class="row col-md-12">
+					<div class="btn-style-upload">
+						<button class="btn btn-primary" style="width:300px; " (click)="openUploadFiles()">Upload HNS File</button>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="container">
+				<div class="row col-md-12">
+					<div class="btn-style-upload">
+						<button class="btn btn-primary" style="width:300px; " (click)="openManageHNSForm()">Submit File</button>
+					</div>
+				</div>
+			</div> -->
+		</div>	
+		<div [hidden]="submitted" *ngIf="isUpload" style="width:100%;">
+			<form [formGroup]="pccform" (ngSubmit)="onSubmit()" novalidate style="margin-left:10%;">
+
+				<!-- <div class="container">
+					<label for="pcc" class="control-label required">
+						<b> GLOBAL CORP ID</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<textarea id="pcc" class="form-control" formControlName="pcc" maxlength="500" style="width:400px;height:150px" placeholder="Enter single or comma separate Global Corp ID's">		
+					    </textarea>
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('pcc')" errorMsg="Global Corp ID is required">
+						</app-field-error-display>
+					</div>
+				</div> -->
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>ISO Country Code</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="8" style="width:400px;" placeholder="Enter ISO Country Code ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="ISO Country Code is required">
+							</app-field-error-display>
+						</div>
+					</div>
+
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Threshold_pct</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Threshold_pct ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Threshold_pct is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Name Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Name Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Name Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Address Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Address Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Address Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>City Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter City Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="City Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>State Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter State Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="State Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Phone Number Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Phone Number Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Phone Number Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Postal Code Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Postal Code Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Postal Code Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Lat Lng Weight</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Lat Lng Weight ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Lat Lng Weight is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row-split">
+					<div class="container space">
+						<label for="Environment">
+							<b>Is Name Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+
+					<div class="container space">
+						<label for="Environment">
+							<b>Is Address Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div >
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container space">
+						<label for="Environment">
+							<b>Is City Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+
+					<div class="container space">
+						<label for="Environment">
+							<b>Is State Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container space">
+						<label for="Environment">
+							<b>Is Phone Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+					<div class="container space">
+						<label for="Environment">
+							<b>Is Postal Match</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								</select>
+							</div> 
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container space" >
+							<label for="Environment">
+								<b>Is Lat Lng Match</b>
+							</label>&nbsp;
+							<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+								<div>
+									<select (change)="selectOption($event.target.value)" class="drp-down-style"
+									>
+									<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+										</select>
+								</div> 
+						</div>
+					<div class="container space" >
+						<label for="Environment">
+							<b>Active Flag</b>
+						</label>&nbsp;
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+							<div>
+								<select (change)="selectOption($event.target.value)" class="drp-down-style"
+								>
+								<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+								 </select>
+							</div> 
+					</div>
+	
+					
+				</div>
+				
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Current Date</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Current Date ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Current Date is required">
+							</app-field-error-display>
+						</div>
+
+						
+					</div>
+					
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Last Updated Date</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Last Updated Date ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Last Updated Date is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+
+				<div class="row-split">
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Current User</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Current User ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Current User is required">
+							</app-field-error-display>
+						</div>
+					</div>
+
+					<div class="container">
+						<label for="UploadedBy" class="control-label required">
+							<b>Last Updated User</b>
+						</label>
+						<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div class="row col-md-12">
+							<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="18" style="width:400px;" placeholder="Enter Last Updated User ">
+							<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Last Updated User is required">
+							</app-field-error-display>
+						</div>
+					</div>
+				</div>
+				
+
+
+
+				
+				<!-- <div class="container space">
+					<label for="Environment">
+						<b>FLUID Hierarchy</b>
+					</label>&nbsp;
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+						<div>
+							<select (change)="selectOption($event.target.value)"
+							>
+							<option [value]="item.id" *ngFor="let item of [{name : 'Yes'}, {name : 'No'}]">{{item.name}}</option>
+							 </select>
+						</div> 
+				</div> -->
+
+				<!-- <div class="container">
+					<label for="UploadedBy" class="control-label required">
+						<b>Created By</b>
+					</label>
+					<span class="asterisk" style="color:red !important;font-weight: bold">*</span>
+					<div class="row col-md-12">
+						<input id="UploadedBy" class="form-control" formControlName="UploadedBy" maxlength="8" style="width:400px;" placeholder="Enter ADS ID ">
+						<app-field-error-display style="margin-left:20px;" [displayError]="isFieldValid('UploadedBy')" errorMsg="Created By is required">
+						</app-field-error-display>
+					</div>
+				</div> -->
+				<br>
+				<br>
+				<div class="container">
+					<div class="row col-md-12">
+						<div class="btn-style">
+							<button class="btn btn-primary" style="width:100px; "  (click)="upload(); ">Submit</button>
+						</div>
+					</div>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+
+</body>

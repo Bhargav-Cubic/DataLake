@@ -1,0 +1,87 @@
+<header *ngIf="isLoggedIn$ | async as isLoggedIn">
+	<!-- <div id="header" style="background: linear-gradient(to right, #e3e7ea 59%, #f1f3f4 99%); height: 75px; width: 100%;">
+		<img src="datalakeui\assets\img\gbt_logo.jpg" height="50px" style="float: left; margin-top: 17.5px; margin-right: 5px; margin-left: 10px">
+		<p align="left" style="color: #0D4F8B; float: left; margin-top: 32px; text-align: center">
+			<span style="font-weight: bold">Global Business Travel</span>
+			<span style="font-weight: bold; margin-left: 350px; margin-bottom: 0px;text-align:center;font-size:100%">DATALAKE UI
+			</span>
+
+		</p>
+	</div> -->
+
+	<div id="header" style="background: linear-gradient(to right, white 59%, white 99%); height: 75px; width: 100%;">
+		<!-- <div id="header" style="background: linear-gradient(to right, #e3e7ea 59%, #f1f3f4 99%); height: 75px; width: 100%;"> -->
+				<img src="http://10.156.203.105:10000\datalakeui\assets\img\gbt_logo.jpg" height="50px" style="float: left; margin-top: 17.5px; margin-right: 5px; margin-left: 10px">
+				<!-- <img src="https://lh3.googleusercontent.com/85KRZDV_KGcn1eQ30pFNpubn4-NK5vdN9-9D0NhTZkVmjK2KWSgxFG98w5iBKuxNO4oP" height="50px" style="float: left; margin-top: 17.5px; margin-right: 5px; margin-left: 10px"> -->
+			<p align="left" style="color: #0D4F8B; float: left; margin-top: 32px; text-align: center">
+				<span style="font-weight: bold; color :black">Global Business Travel</span>
+				<span style="font-weight: bold; color :black;margin-left: 350px; margin-bottom: 0px;text-align:center;font-size:100%">DATALAKE UI
+				</span>
+	
+			</p>
+		</div>
+
+</header>
+
+
+<div>
+
+<mdb-navbar class="bg-header" SideClass="navbar navbar-expand-lg navbar-dark blue" *ngIf="isLoggedIn$ | async as isLoggedIn">
+	<links>
+		<ul class="navbar-nav mr-auto" style="margin-left:-5%">
+			<li class="nav-item " *ngIf="isHNSActive$ | async as isHNSActive">
+				<a class="nav-link waves-light"  mdbRippleRadius routerLink="/hotel-file-upload" style="border-right:1px solid #005685;">HNS File Upload </a>
+			</li> 
+			<li class="nav-item " *ngIf="isPccActive$ | async as isPccActive">
+				<a class="nav-link waves-light"  mdbRippleRadius routerLink="/add-pcc" style="border-right:1px solid #005685;"  >M&E PCC </a>
+			</li>
+			<li class="nav-item " *ngIf="isUserAccessActive$ | async as isUserAccessActive" style="border-right:1px solid #005685;">
+				<a class="nav-link waves-light"  mdbRippleRadius routerLink="/add-user">DL Access Request</a>
+			</li>
+			<li class="nav-item " *ngIf="isDlFileupLoadActive$ | async as isDlFileupLoadActive" style="border-right: 1px solid #005685;;">
+				<a class="nav-link waves-light"  mdbRippleRadius routerLink="/SelfServiceData">Self Service Data</a>
+			</li>
+			<li class="nav-item " >
+				<a class="nav-link waves-light" mdbRippleRadius routerLink="/manage-emp" style="border-right: 1px solid #005685;">Manage Emp Hier </a>
+			</li>
+			<li class="nav-item " >
+				<a class="nav-link waves-light" mdbRippleRadius routerLink="/manage-hns">Manage HNS Match </a>
+			</li>
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item ">
+				<a class="nav-link waves-light" mdbRippleRadius (click)="onLogout()" *ngIf="isLoggedIn">
+					<img style="height: 25px; width: 25px" (click)="onLogout()" src='https://www.iconsdb.com/icons/preview/white/logout-xxl.png' >
+				</a>
+			</li>
+		</ul>
+	</links>
+
+</mdb-navbar>
+</div>
+
+
+
+
+
+<router-outlet></router-outlet>
+<!-- 
+
+
+
+
+<style>
+	.footer {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		background-color: grey;
+		color: white;
+		text-align: right;
+		height: 2%;
+	}
+</style>
+<div class="footer" *ngIf="isLoggedIn$ | async as isLoggedIn">
+	<p>gbt internal use only </p>
+</div> -->

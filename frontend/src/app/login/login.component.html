@@ -1,0 +1,53 @@
+<title>DATALAKE UI</title>
+
+<body>
+  <!-- <div style="text-align:center;width:1500px;height:850px;display: table-cell;vertical-align: middle;">
+    <div style="width:450px;height:300px;margin: 0px auto; border-radius: 25px;">
+      <br>
+      <br>
+      <p class="h5 text-center mb-4">DATALAKE UI</p> -->
+      <div class='bg' >
+          <img src="https://lh3.googleusercontent.com/85KRZDV_KGcn1eQ30pFNpubn4-NK5vdN9-9D0NhTZkVmjK2KWSgxFG98w5iBKuxNO4oP" height="50px" style="margin : 0 auto; height : 100px; width : 100px">
+    
+        <!-- <img src="https://web.aexp-static.com/au/content/text/HALO/halo-about-credit-cards-repayments/Images/1513007_Blue_Background_Gradient.jpg" style="position : fixed;left : 0;right:0;top:0;"/> -->
+        <div style="width:450px;height:300px;margin: 0px auto; border-radius: 25px;">
+    
+          <br>
+          <br>
+          <p class="h5 text-center mb-4 tittle-color">DATALAKE UI</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="md-form">
+          <i class="fa fa-user prefix grey-text"></i>
+          <input type="text" class="input-style" placeholder="User Name" formControlName="userName" required mdbActive>
+          <div>
+            <app-field-error-display [displayError]="isFieldValid('userName')" errorMsg="User Name  is required">
+            </app-field-error-display>
+          </div>
+        </div>
+
+        <br>
+        <div class="md-form">
+          <i class="fa fa-lock prefix grey-text"></i>
+          <input type="password" class="input-style" placeholder="Password" id="password" formControlName="password" required mdbActive>
+          <div>
+            <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Password  is required">
+            </app-field-error-display>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button color="primary"  class="btn waves-light" mdbRippleRadius type="submit">Login</button>
+        </div>
+        <div>
+
+          <label style="color: red">{{loginResponseMessage}}</label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+</body>
